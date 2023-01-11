@@ -1,24 +1,16 @@
-
-# [
-#   {
-#     "id": 1,
-#     "nome_do_produto": "MESA",
-#     "nome_da_empresa": "Forces of Nature",
-#     "data_de_fabricacao": "2022-05-04",
-#     "data_de_validade": "2023-02-09",
-#     "numero_de_serie": "FR48",
-#     "instrucoes_de_armazenamento": "Conservar ao abrigo de luz"
-#   }
-# ]
-# Data de fabricação mais antiga: YYYY-MM-DD
-# Data de validade mais próxima: YYYY-MM-DD
-# Empresa com mais produtos: NOME DA EMPRESA
-# Produtos estocados por empresa:
-# - Physicians Total Care, Inc.: QUANTIDADE
-# - Newton Laboratories, Inc.: QUANTIDADE
-# - Forces of Nature: QUANTIDADE
+from inventory_report.reports.simple_report import SimpleReport
 
 
-class CompleteReport:
-    def generate():
-        pass
+class CompleteReport(SimpleReport):
+    @classmethod
+    def generate(cls, file):
+        first_report = super().generate(file)
+        second_report = ""
+        for company, qty_products in cls.company_with_products(file).items():
+            second_report += f"- {company}: {qty_products}\n"
+
+        return (
+            f"{first_report}\n"
+            f"Produtos estocados por empresa:\n"
+            f"{second_report}"
+            )

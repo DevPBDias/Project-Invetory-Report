@@ -4,6 +4,11 @@ from collections import Counter
 
 class SimpleReport:
     @classmethod
+    def company_with_products(cls, file):
+        companies = [item["nome_da_empresa"] for item in file]
+        return Counter(companies)
+
+    @classmethod
     def generate(cls, file):
         today = dt.today().strftime("%Y-%m-%d")
 
