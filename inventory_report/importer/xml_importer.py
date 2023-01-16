@@ -14,5 +14,4 @@ class XmlImporter(Importer):
             for elem in root:
                 data.append({response.tag: response.text for response in elem})
             return data
-        else:
-            return "Arquivo no formato incorreto"
+        raise ValueError("Arquivo inválido")

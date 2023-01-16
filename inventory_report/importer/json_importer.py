@@ -9,5 +9,4 @@ class JsonImporter(Importer):
             with open(file) as json_file:
                 data = json.load(json_file)
                 return list(data)
-        else:
-            return "Arquivo no formato incorreto"
+        raise ValueError("Arquivo inválido")

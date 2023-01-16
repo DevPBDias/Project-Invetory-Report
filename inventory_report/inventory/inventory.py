@@ -26,5 +26,4 @@ class Inventory:
             return SimpleReport.generate(report)
         elif type == "completo":
             return CompleteReport.generate(report)
-        else:
-            return "Arquivo no formato incorreto"
+        raise ValueError("Arquivo inválido")

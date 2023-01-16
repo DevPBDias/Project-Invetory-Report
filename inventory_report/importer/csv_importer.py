@@ -9,5 +9,4 @@ class CsvImporter(Importer):
             with open(file) as csv_file:
                 data = csv.DictReader(csv_file)
                 return list(data)
-        else:
-            return "Arquivo no formato incorreto"
+        raise ValueError("Arquivo inválido")
